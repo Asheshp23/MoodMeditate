@@ -4,21 +4,38 @@
 //
 //  Created by Ashesh Patel on 2024-12-18.
 //
-
 import SwiftUI
+import HealthKit
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+  @State private var isAuthorized = false
+  @State private var showingMoodView = true
+  
+  var body: some View {
+    Group {
+      if showingMoodView {
+        StateOfMindView(healthStore: HKHealthStore())
+      } else {
+        MeditationView()
+      }
     }
-}
-
-#Preview {
-    ContentView()
-}
+    .onAppear {
+      requestHealthKitAuthorization()
+    }
+  }
+  
+  func requestHealthKitAuthorization() {
+    HealthKitService.shared.requestAuthorization { success, error in
+      DispatchQueue.main.async {
+        isAuthorized = success
+        if !success {
+       
+                }
+                }
+                }
+                }
+                
+                }
+                #Preview {
+            ContentView()
+          }
