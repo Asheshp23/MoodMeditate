@@ -17,7 +17,6 @@ struct StateOfMindView: View {
     var healthStore: HKHealthStore
     
   var body: some View {
-    
     Form {
       Section(header: Text("Valence")) {
         Picker("Valence", selection: $selectedValence) {
